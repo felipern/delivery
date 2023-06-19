@@ -26,6 +26,9 @@
             "migrations/.gitignore"
         ]
     },
+    "felipern/codechat-br-bundle": {
+        "version": "dev-main"
+    },
     "symfony/apache-pack": {
         "version": "1.0",
         "recipe": {

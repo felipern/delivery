@@ -1,3 +1,7 @@
 web_controllers:
     resource: ../src/UI/Http/Web/Controller/
     type: attribute
+
+codechatbr_routes:
+    resource: '@CodechatBrBundle/src/Controller'
+    type: attribute

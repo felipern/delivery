@@ -25,12 +25,24 @@ class CadastroProdutoController extends AbstractController
         //     'apikey' => 't8OOEeISKzpmc3jjcMqBWYSaJsafdefer'
         // ]);
 
+        // $response = $httpClient->request('POST', 'http://whatsappapi:8083/instance/create', [
+        //     'headers' => [
+        //         'apikey' => 't8OOEeISKzpmc3jjcMqBWYSaJsafdefer',
+        //         'Content-Type' => 'application/json',
+        //     ],
+        //     'body' => json_encode([
+        //         'instanceName' => 'codechat',
+        //     ]),
+        // ]);
+
         $response = $httpClient->request('GET', 'http://whatsappapi:8083/instance/connect/codechat', [
             'headers' => [
                 'apikey' => 't8OOEeISKzpmc3jjcMqBWYSaJsafdefer',
                 'Accept' => 'application/json',
             ]
         ]);
+
+        dump($response->getContent());
 
         // grab URL and pass it to the browser
         $img = json_decode($response->getContent())->base64;

@@ -1,0 +1,28 @@
+{
+    "name": "felipern/codechat-br-bundle",
+    "description": "A symfony bundle to integrate with codechatBr",
+    "type": "symfony-bundle",
+    "license": "MIT",
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../codechatBrSdk",
+            "options": {
+                "symlink": true
+            }
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "CodechatBrBundle\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Felipe Ribeiro"
+        }
+    ],
+    "require": {
+        "felipern/codechat-br-sdk": "dev-main"
+    }
+}

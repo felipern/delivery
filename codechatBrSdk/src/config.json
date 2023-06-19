@@ -1,0 +1,32 @@
+{
+    "APIs" : {
+        "INSTANCES": {
+            "ENDPOINTS": {
+                "createInstance": {
+                    "route": "/instance/create",
+                    "method": "post"
+                },
+                "connectInstance": {
+                    "route": "/instance/connect/:instanceName",
+                    "method": "get"
+                },
+                "connectionStateInstance" : {
+                    "route": "/instance/connectionState/:instanceName",
+                    "method": "get"
+                }
+            }
+        },
+        "MESSAGES": {
+            "ENDPOINTS": {
+                "sendTextMessage": {
+                    "route": "/message/sendText/:instanceName",
+                    "method": "post"
+                },
+                "sendMediaMessage": {
+                    "route": "/message/sendMedia/:instanceName",
+                    "method": "post"
+                }
+            }
+        }
+    }
+}
