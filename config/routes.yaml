@@ -5,3 +5,4 @@ web_controllers:
 codechatbr_routes:
     resource: '@CodechatBrBundle/src/Controller'
     type: attribute
+    prefix: /codechat

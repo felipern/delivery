@@ -1,0 +1,16 @@
+<a href="{{ path('codechat_br_instance_create') }}">New</a>
+{% block body %}
+<table>
+    <tr>
+        <th>Uuid</th>
+        <th>Name</th>
+    </tr>
+{% for instance in instances%}
+    <tr>
+        <td>{{ instance.uuid }}</td>
+        <td>{{ instance.name }}</td>
+        <td><a href="{{ path('codechat_br_instance_connect', {uuid: instance.uuid}) }}">Conectar</a></td>
+    </tr>
+{% endfor %}
+</table>
+{% endblock %}

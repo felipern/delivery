@@ -4,7 +4,6 @@ services:
     php:
       build:
         context: .
-      user: "${UID}:${GID}"
       links:
         - db
       volumes:
@@ -44,18 +43,19 @@ services:
         - "1080:1080"
     
     whatsappapi:
-      image: codechat/api
+      image: codechat/api:latest
       environment: 
         - "DATABASE_CONNECTION_URI=mongodb://root:example@mongodb:27017/?authSource=admin&readPreference=primary&ssl=false&directConnection=true"
         - "DATABASE_ENABLED=true"
         - "DATABASE_SAVE_DATA_INSTANCE=true"
         - "AUTHENTICATION_TYPE=apikey"
         - "AUTHENTICATION_API_KEY=${WHATSAPP_API_KEY}"
+        - "LOG_LEVEL=ERROR,WARN,DEBUG,INFO,LOG,VERBOSE,DARK"
       ports: 
         - "8083:8083"
       volumes:
         - "./data/whatsapp-api/instances:/home/api/instances"
-
+      command: ['node', './dist/src/main.js']
     mongodb:
       image: mongo
       restart: always

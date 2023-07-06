@@ -6,12 +6,20 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use CodechatBr\CodechatBr;
+use CodechatBrBundle\Repository\InstanceRepository;
+use Symfony\Component\Uid\Uuid;
 
 class ConnectInstanceController extends AbstractController
 {
-    #[Route('/codechat_br/instance/qr', name: 'codechat_br_instance_qr')]
-    public function qr()
-    {
+    #[Route('/instance/{uuid}/connect', name: 'codechat_br_instance_connect')]
+    public function qr(
+        Uuid $uuid,
+        InstanceRepository $instanceRepository,
+    ) {
+        $instance = $instanceRepository->findOneBy([
+            'uuid' => $uuid
+        ]);
+        
         $options = [
             'url' => 'http://whatsappapi:8083/',
             'apikey' => 'F61C09855DACF7950FF96FC5D98C1929',
@@ -19,14 +27,22 @@ class ConnectInstanceController extends AbstractController
 
         $apiClient = CodechatBr::getInstance($options);
 
-        $response = $apiClient->connectionStateInstance(['instanceName' => '123']);
-            
+        $response = $apiClient->connectionStateInstance(['instanceName' => $instance->getUuid()]);
+        
         if (!$response) {
-            $response = $apiClient->createInstance(null, ['instanceName' => '123']);
+            $response = $apiClient->createInstance(null, ['instanceName' => $instance->getUuid()]);
         }
     
-        $response = $apiClient->connectInstance(['instanceName' => '123'], null);    
+        
+        
+        if($response) {
 
-        return new Response('<html> <body><img src="' . $response['base64'] . '"> </body></html>');
+        }
+
+        $response = $apiClient->connectInstance(['instanceName' => $instance->getUuid()], null);    
+        dump($response);
+        return $this->render('@CodechatBr/instance/connect.html.twig', [
+            'image' => $response['base64']
+        ]);
     }
 }
